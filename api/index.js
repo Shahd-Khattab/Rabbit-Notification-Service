@@ -5,14 +5,14 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const cors = require("cors");
-require("dotenv").config({ path: "./config.env" });
+require("dotenv").config();
 const port = 3000;
 app.use(cors());
 app.use(express.json());
 
 
-SENDGRID_API_KEY= "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"
-sgMail.setApiKey("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");
+//SENDGRID_API_KEY= "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"
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 app.all('*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -28,7 +28,7 @@ app.post('/api/notification', async (req,res) => {
       to: req.body.email, // msh mafroud ha3miel res.body? wla ezzai?
     from:{
         name:"Rabbit Market",
-        email:"shahdmk_12@hotmail.com"  //dah mn send grid fih elsender address
+        email:"martrabbits@gmail.com"  //dah mn send grid fih elsender address
     },
     subject:"Notification",//, //ahout maslan esm el service el ana basend mnha 
     text: req.body.text // el message nafsaha
